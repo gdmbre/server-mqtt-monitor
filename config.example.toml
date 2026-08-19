@@ -1,0 +1,79 @@
+device_name = "Router"
+topic_prefix = "servers/router"
+loop_interval = 1
+
+[mqtt]
+broker = "mqtt.example.com"
+port = 1883
+client_id = "server-monitor-router"
+username = "server-monitor"
+password = "CHANGE_ME"
+keepalive = 60
+
+[mqtt.topics]
+cpu_temp = "cpu_temp"
+cpu_load = "cpu_load"
+warning = "warning"
+info = "info"
+
+[checks.cpu_temp]
+enabled = true
+interval = 10
+warning_temp = 65
+# Optional. Leave commented to auto-discover thermal_zone*/temp.
+# path = "/sys/class/thermal/thermal_zone0/temp"
+
+[checks.cpu_load]
+enabled = true
+interval = 10
+
+[checks.network_speed]
+enabled = true
+interval = 10
+interfaces = ["eth0"]
+
+[checks.services]
+enabled = true
+interval = 30
+names = ["ssh"]
+
+[checks.interfaces]
+enabled = true
+interval = 30
+names = ["eth0"]
+
+[checks.reboot_required]
+enabled = true
+interval = 300
+file = "/var/run/reboot-required"
+
+[checks.last_login]
+enabled = true
+interval = 30
+
+[checks.rpi_throttled]
+enabled = false
+interval = 30
+
+[checks.usb_warnings]
+enabled = true
+interval = 30
+keywords = [
+    "usb",
+    "disconnect",
+    "reset high-speed USB device",
+    "reset superspeed USB device",
+    "device descriptor read",
+    "unable to enumerate usb device",
+    "over-current",
+    "under-voltage",
+    "voltage",
+]
+
+[checks.smart]
+enabled = true
+interval = 300
+# Empty list means auto-discover with `smartctl --scan-open`.
+devices = []
+# Or specify explicitly:
+# devices = ["/dev/sda", "/dev/sdb", "/dev/nvme0"]
