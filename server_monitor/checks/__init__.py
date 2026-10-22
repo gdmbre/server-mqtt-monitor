@@ -8,6 +8,7 @@ from .rpi_throttled import RpiThrottledCheck
 from .services import ServicesCheck
 from .smart import SmartCheck
 from .usb_warnings import UsbWarningsCheck
+from .trivy_check import TrivyCheck
 
 
 AVAILABLE_CHECKS = [
@@ -21,4 +22,5 @@ AVAILABLE_CHECKS = [
     RpiThrottledCheck,
     UsbWarningsCheck,
     SmartCheck,
+    TrivyCheck
 ]

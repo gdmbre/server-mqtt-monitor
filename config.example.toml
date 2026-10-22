@@ -70,6 +70,12 @@ keywords = [
     "voltage",
 ]
 
+[checks.trivy]
+enabled = true
+interval = 86400
+images_file = "/home/ratkill/diun/images.yml"
+state_file = "/var/lib/server-monitor/trivy-state.json"
+
 [checks.smart]
 enabled = true
 interval = 300

@@ -17,6 +17,7 @@ servers with a different TOML configuration per host.
 - USB / kernel warnings from `journalctl`
 - SMART health and disk temperature via `smartctl`
 
+
 Every check can be enabled or disabled independently and has its own interval.
 
 ## MQTT topic layout
@@ -78,6 +79,10 @@ Then edit:
 ```bash
 sudo nano /etc/server-monitor/config.toml
 ```
+Use for plugin test:
+'''bash
+server-monitor --test
+
 
 Start the service:
 
