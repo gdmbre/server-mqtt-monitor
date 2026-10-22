@@ -1,4 +1,5 @@
 import paho.mqtt.client as mqtt
+import ssl
 
 
 class MqttPublisher:
@@ -17,11 +18,27 @@ class MqttPublisher:
             self.client.username_pw_set(username, password)
 
     def connect(self):
+        use_tls = self.settings.mqtt.get("tls", False)
+
+        if use_tls:
+            self.client.tls_set_context(
+                ssl.create_default_context()
+            )
+
+        port = int(
+            self.settings.mqtt.get(
+                "port", 8883 if use_tls else 1883
+            )
+        )
+
         self.client.connect(
             self.settings.mqtt["broker"],
-            int(self.settings.mqtt.get("port", 1883)),
-            keepalive=int(self.settings.mqtt.get("keepalive", 60)),
+            port,
+            keepalive=int(
+                self.settings.mqtt.get("keepalive", 60)
+            ),
         )
+
         self.client.loop_start()
 
     def disconnect(self):
