@@ -79,10 +79,16 @@ Then edit:
 ```bash
 sudo nano /etc/server-monitor/config.toml
 ```
-Use for plugin test:
-'''bash
-server-monitor --test
 
+Use for plugin test:
+```bash
+server-monitor --test
+```
+
+Use for test config:
+```bash
+server-monitor --check-config
+```
 
 Start the service:
 
